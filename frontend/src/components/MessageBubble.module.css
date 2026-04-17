@@ -1,0 +1,54 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeUp 0.2s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.userRow { align-items: flex-end; }
+.assistantRow { align-items: flex-start; }
+
+.roleTag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  padding: 0 2px;
+}
+
+.userRow .roleTag   { color: var(--accent); }
+
+.bubble {
+  max-width: 76%;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.userRow .bubble {
+  background: var(--accent-dim);
+  border-color: rgba(0, 255, 136, 0.18);
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.assistantRow .bubble {
+  background: var(--bg-panel);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+.content {
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.userRow .content {
+  color: #d0ffe8;
+}
