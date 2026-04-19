@@ -1,45 +1,82 @@
 .card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px 24px;
+  background: var(--bg-2);
+  border: 1px solid var(--b1);
+  border-radius: var(--r2);
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  transition: border-color var(--transition);
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--b2), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .card:hover {
-  border-color: var(--border-bright);
+  border-color: var(--b2);
+  transform: translateY(-1px);
 }
 
+.card:hover::before { opacity: 1; }
+
 .card.accent {
-  border-color: rgba(0, 255, 136, 0.25);
-  background: var(--accent-dim);
+  border-color: rgba(245,166,35,0.2);
+  background: linear-gradient(135deg, rgba(245,166,35,0.06), var(--bg-2));
+}
+
+.card.accent::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, rgba(245,166,35,0.08), transparent 70%);
 }
 
 .value {
-  font-family: var(--font-mono);
-  font-size: 32px;
+  font-family: var(--font-display);
+  font-size: 36px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--t1);
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
-.card.accent .value {
-  color: var(--accent);
+.card.accent .value { color: var(--amber); }
+
+.sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--t3);
 }
 
 .label {
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--t3);
+  margin-top: 2px;
 }
 
-.valueSkeleton {
-  height: 32px;
-  width: 80px;
-  border-radius: var(--radius-sm);
+.skelVal {
+  height: 36px;
+  width: 70px;
+  border-radius: var(--r1);
+  margin-bottom: 4px;
+}
+
+.skelLab {
+  height: 10px;
+  width: 100px;
+  border-radius: var(--r0);
 }

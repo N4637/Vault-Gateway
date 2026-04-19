@@ -1,54 +1,86 @@
 .row {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  animation: fadeUp 0.2s ease both;
+  gap: 5px;
+  animation: fadeUp 0.25s var(--ease-out) both;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+.user  { align-items: flex-end; }
+.assistant { align-items: flex-start; }
+
+.label {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
 }
 
-.userRow { align-items: flex-end; }
-.assistantRow { align-items: flex-start; }
-
-.roleTag {
+.labelUser {
   font-family: var(--font-mono);
   font-size: 9px;
-  letter-spacing: 0.18em;
-  color: var(--text-muted);
-  padding: 0 2px;
+  letter-spacing: 0.16em;
+  color: var(--t3);
 }
 
-.userRow .roleTag   { color: var(--accent); }
+.labelVault {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--amber);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
+/* ── Bubble ──────────────────────────────────────────────────── */
 .bubble {
-  max-width: 76%;
+  position: relative;
+  max-width: 78%;
   padding: 12px 16px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  line-height: 1.7;
-  font-size: 14px;
+  border: 1px solid var(--b1);
+  border-radius: var(--r2);
+  line-height: 1.75;
+  font-size: 13.5px;
+  font-family: var(--font-body);
+  overflow: hidden;
 }
 
-.userRow .bubble {
-  background: var(--accent-dim);
-  border-color: rgba(0, 255, 136, 0.18);
-  border-bottom-right-radius: var(--radius-sm);
+.user .bubble {
+  background: var(--bg-3);
+  border-color: var(--b2);
+  border-bottom-right-radius: var(--r0);
 }
 
-.assistantRow .bubble {
-  background: var(--bg-panel);
-  border-bottom-left-radius: var(--radius-sm);
+.assistant .bubble {
+  background: var(--bg-2);
+  border-bottom-left-radius: var(--r0);
+}
+
+/* Amber left-glow on PII responses */
+.piiGlow {
+  border-left-color: rgba(245,166,35,0.4);
+  background: linear-gradient(
+    90deg,
+    rgba(245,166,35,0.04) 0%,
+    var(--bg-2) 60px
+  );
+}
+
+/* Amber stripe on left edge */
+.piiStripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--amber), transparent);
+  opacity: 0.6;
 }
 
 .content {
-  color: var(--text-primary);
+  color: var(--t1);
   white-space: pre-wrap;
   word-break: break-word;
+  font-size: 13.5px;
 }
 
-.userRow .content {
-  color: #d0ffe8;
-}
+.user .content { color: #dddbe8; }
