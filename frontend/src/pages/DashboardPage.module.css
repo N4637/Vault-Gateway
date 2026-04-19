@@ -2,24 +2,36 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
-/* ── Header ─────────────────────────────────────────────────── */
+/* ── Header ─────────────────────────── */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 28px 14px;
+  padding: 16px 32px;
   border-bottom: 1px solid var(--b1);
   flex-shrink: 0;
+  background: rgba(8,8,9,0.85);
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: var(--t1);
 }
 
@@ -33,7 +45,7 @@
 .refreshBtn {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.08em;
@@ -41,71 +53,87 @@
   background: none;
   border: 1px solid var(--b1);
   border-radius: var(--r1);
-  padding: 5px 10px;
+  padding: 6px 12px;
   cursor: pointer;
   text-transform: uppercase;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 
 .refreshBtn:hover {
-  color: var(--amber);
-  border-color: rgba(245,166,35,0.3);
+  color: var(--gold);
+  border-color: var(--gold-glow);
+  background: var(--gold-dim);
 }
 
-/* ── Body ────────────────────────────────────────────────────── */
+/* ── Body ───────────────────────────── */
 .body {
   flex: 1;
   overflow-y: auto;
-  padding: 24px 28px;
+  padding: 28px 32px 40px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
+  width: 100%;
 }
 
-/* ── Stat grid ───────────────────────────────────────────────── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-@media (max-width: 960px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* ── Error ───────────────────────────────────────────────────── */
+/* ── Error ──────────────────────────── */
 .error {
-  padding: 10px 14px;
+  padding: 11px 16px;
   background: var(--red-dim);
-  border: 1px solid rgba(255,95,95,0.2);
+  border: 1px solid rgba(240,84,84,0.2);
   border-radius: var(--r2);
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--red);
 }
 
-/* ── Two column row ──────────────────────────────────────────── */
-.row2 {
+/* ── Stat grid ──────────────────────── */
+.grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  min-height: 320px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  width: 100%;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Two column row ─────────────────── */
+.row2 {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 16px;
+  width: 100%;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
   .row2 { grid-template-columns: 1fr; }
 }
 
-/* ── Panel shared ────────────────────────────────────────────── */
+/* ── Panels ─────────────────────────── */
 .chartPanel, .tablePanel {
   background: var(--bg-2);
   border: 1px solid var(--b1);
-  border-radius: var(--r2);
-  padding: 18px 16px 12px;
+  border-radius: var(--r3);
+  padding: 22px 22px 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
   transition: border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.chartPanel::before, .tablePanel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--b2), transparent);
 }
 
 .chartPanel:hover, .tablePanel:hover {
@@ -115,12 +143,13 @@
 .panelHeader {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .panelTitle {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--t1);
 }
@@ -131,14 +160,13 @@
   color: var(--t3);
 }
 
-/* Skeleton bars */
+/* Skeleton */
 .skelChart {
-  flex: 1;
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  padding: 0 4px;
-  height: 200px;
+  height: 240px;
+  width: 100%;
 }
 
 .skelBar {
@@ -147,13 +175,14 @@
   min-height: 8px;
 }
 
-/* Tooltip */
+/* ── Tooltip ────────────────────────── */
 .tooltip {
-  background: var(--bg-3);
+  background: var(--bg-4);
   border: 1px solid var(--b2);
   border-radius: var(--r2);
   padding: 10px 14px;
   font-family: var(--font-mono);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
 .ttType {
@@ -161,23 +190,19 @@
   letter-spacing: 0.1em;
   color: var(--t3);
   margin-bottom: 4px;
+  text-transform: uppercase;
 }
 
-.ttVal {
-  font-size: 16px;
-  font-weight: 600;
-}
+.ttVal { font-size: 17px; font-weight: 600; }
 
-/* ── Table ───────────────────────────────────────────────────── */
+/* ── Table ──────────────────────────── */
 .table {
   width: 100%;
   border-collapse: collapse;
   font-size: 12px;
 }
 
-.table thead tr {
-  border-bottom: 1px solid var(--b1);
-}
+.table thead tr { border-bottom: 1px solid var(--b1); }
 
 .table th {
   font-family: var(--font-mono);
@@ -199,14 +224,14 @@
 .table tbody tr:hover { background: var(--b0); }
 
 .table td {
-  padding: 8px 10px;
+  padding: 9px 10px;
   vertical-align: middle;
 }
 
 .table td:first-child {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
 }
 
 .dot {
@@ -220,6 +245,7 @@
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--t2);
+  word-break: break-word;
 }
 
 .barWrap {
@@ -232,9 +258,9 @@
   height: 3px;
   border-radius: 2px;
   min-width: 2px;
-  max-width: 80px;
-  opacity: 0.7;
-  transition: width 0.6s var(--ease-out);
+  max-width: 70px;
+  opacity: 0.75;
+  transition: width 0.7s var(--ease-out);
 }
 
 .pct {
@@ -243,3 +269,17 @@
   color: var(--t3);
   white-space: nowrap;
 }
+
+/* ── No data ────────────────────────── */
+.noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  gap: 10px;
+  color: var(--t3);
+}
+
+.noData p { font-family: var(--font-mono); font-size: 11px; }
+.noData span { font-family: var(--font-mono); font-size: 10px; color: var(--t4); }

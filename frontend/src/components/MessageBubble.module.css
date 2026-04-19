@@ -5,7 +5,7 @@
   animation: fadeUp 0.25s var(--ease-out) both;
 }
 
-.user  { align-items: flex-end; }
+.user      { align-items: flex-end; }
 .assistant { align-items: flex-start; }
 
 .label {
@@ -25,22 +25,21 @@
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.16em;
-  color: var(--amber);
+  color: var(--gold);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
-/* ── Bubble ──────────────────────────────────────────────────── */
+/* ── Bubble ───────────────────────── */
 .bubble {
   position: relative;
-  max-width: 78%;
-  padding: 12px 16px;
+  max-width: 82%;
+  padding: 13px 17px;
   border: 1px solid var(--b1);
   border-radius: var(--r2);
-  line-height: 1.75;
+  line-height: 1.78;
   font-size: 13.5px;
-  font-family: var(--font-body);
   overflow: hidden;
 }
 
@@ -55,25 +54,18 @@
   border-bottom-left-radius: var(--r0);
 }
 
-/* Amber left-glow on PII responses */
+/* Gold left-glow on PII responses */
 .piiGlow {
-  border-left-color: rgba(245,166,35,0.4);
-  background: linear-gradient(
-    90deg,
-    rgba(245,166,35,0.04) 0%,
-    var(--bg-2) 60px
-  );
+  border-left-color: rgba(232,160,32,0.4);
+  background: linear-gradient(90deg, rgba(232,160,32,0.04) 0%, var(--bg-2) 56px);
 }
 
-/* Amber stripe on left edge */
 .piiStripe {
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  left: 0; top: 0; bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, transparent, var(--amber), transparent);
-  opacity: 0.6;
+  background: linear-gradient(180deg, transparent 10%, var(--gold) 50%, transparent 90%);
+  opacity: 0.5;
 }
 
 .content {
@@ -83,4 +75,4 @@
   font-size: 13.5px;
 }
 
-.user .content { color: #dddbe8; }
+.user .content { color: #d8d5ea; }

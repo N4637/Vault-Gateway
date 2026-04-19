@@ -4,24 +4,37 @@
   gap: 7px;
   padding: 4px 10px 4px 6px;
   background: color-mix(in srgb, var(--c) 7%, transparent);
-  border: 1px solid color-mix(in srgb, var(--c) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 18%, transparent);
   border-radius: var(--r1);
   font-family: var(--font-mono);
   font-size: 11px;
   max-width: 100%;
   animation: fadeIn 0.2s var(--ease-out) both;
+  transition: border-color 0.15s;
+}
+
+.badge:hover {
+  border-color: color-mix(in srgb, var(--c) 35%, transparent);
+}
+
+/* Compact variant for inspector panel */
+.compact {
+  padding: 3px 8px 3px 5px;
+  font-size: 10.5px;
+  width: 100%;
 }
 
 .type {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--c);
   background: color-mix(in srgb, var(--c) 12%, transparent);
   padding: 2px 5px;
   border-radius: 2px;
   white-space: nowrap;
   flex-shrink: 0;
+  text-transform: uppercase;
 }
 
 .divider {
@@ -32,10 +45,11 @@
 }
 
 .placeholder {
-  color: color-mix(in srgb, var(--c) 90%, white);
+  color: color-mix(in srgb, var(--c) 85%, white);
   font-weight: 500;
   white-space: nowrap;
   flex-shrink: 0;
+  font-size: 10px;
 }
 
 .arrow {
@@ -50,6 +64,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   min-width: 0;
+  font-size: 10.5px;
 }
 
 .conf {
