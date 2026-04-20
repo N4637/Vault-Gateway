@@ -1,13 +1,3 @@
-"""
-detector.py — PII detection using Microsoft Presidio + spaCy + custom rules.
-
-Fixes applied:
-  - Phone numbers: regex fallback for unformatted digit strings (7-15 digits)
-  - API keys: lowered min length to 6 chars, added special-char mixed pattern
-  - Entropy: works on any printable chars including specials, threshold lowered
-  - SECRET entity for high-entropy tokens not caught by other rules
-"""
-
 import re
 import logging
 import math

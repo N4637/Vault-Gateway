@@ -15,7 +15,6 @@ google-genai==1.16.0
 # HTTP
 httpx>=0.28.1
 
-# DB (for dashboard stats - Phase 6, install now so imports don't break)
 sqlalchemy==2.0.30
 aiosqlite==0.20.0
 
