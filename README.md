@@ -173,10 +173,4 @@ Chat history is preserved when navigating between the Terminal and Dashboard pag
 
 ---
 
-## Known limitations
 
-- No user authentication yet — single-user deployment only
-- English language PII only (regex and entropy scanning work on any language)
-- In-memory session store resets on server restart
-
----
