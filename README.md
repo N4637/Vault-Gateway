@@ -19,7 +19,7 @@ Raw prompt → Detect PII → Mask → Send to Gemini → Rehydrate → User get
 1. You submit a prompt
 2. Three detection layers run (explained below)
 3. Sensitive values get replaced: `john@acme.com` → `[EMAIL_ADDRESS_1]`
-4. The clean prompt goes to the llm being used.
+4. The clean prompt goes to Gemini
 5. The response comes back with placeholders
 6. Original values are restored before you see anything
 7. Session mapping is deleted from memory
@@ -36,6 +36,8 @@ Uses Microsoft Presidio with a spaCy `en_core_web_lg` model to catch the "human"
 
 Nine patterns for developer-specific secrets that NLP models don't understand:
 
+- `sk-...` OpenAI-style keys
+- `AKIA...` AWS access keys
 - `api_key=`, `password=`, `secret=`, `token=` labelled assignments
 - `postgresql://`, `mongodb://` connection strings
 - Mixed special-character secrets like `67$3@#kaesf`
@@ -105,6 +107,9 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python -m spacy download en_core_web_lg
 
+cp .env.example .env
+# Add your GEMINI_API_KEY to .env
+
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -120,6 +125,27 @@ Open `http://localhost:5173`. The Vite proxy forwards `/api/*` to the FastAPI ba
 
 ---
 
+## Environment variables
+
+Copy `.env.example` to `.env` and fill in your values:
+
+```env
+LLM_PROVIDER=gemini
+
+GEMINI_API_KEY=your-key-here
+HF_TOKEN=your-hugging-face-token(in case you dont want to use gemini api)
+
+# Recommended: gemini-2.0-flash (fast, cheap, good quality)
+# Alternatives: gemini-2.0-flash-lite, gemini-1.5-pro
+GEMINI_MODEL=gemini-2.5-flash
+
+APP_ENV=development
+LOG_LEVEL=INFO
+
+DATABASE_URL=sqlite+aiosqlite:///./vault.db
+
+ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
+```
 
 ---
 
@@ -128,7 +154,8 @@ Open `http://localhost:5173`. The Vite proxy forwards `/api/*` to the FastAPI ba
 | Method | Endpoint | Description |
 |---|---|---|
 | `POST` | `/api/prompt` | Run the full masking pipeline |
-| `GET` | `/api/dashboard/` | Aggregated session statistics |
+| `GET` | `/api/dashboard/stats` | Aggregated session statistics |
+
 
 The `/api/prompt` endpoint accepts `{ prompt, system_message? }` and returns the masked prompt, LLM response, detected entities with confidence scores, and a summary of entity types found.
 
@@ -153,5 +180,3 @@ Chat history is preserved when navigating between the Terminal and Dashboard pag
 - In-memory session store resets on server restart
 
 ---
-
-
